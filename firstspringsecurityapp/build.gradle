@@ -19,6 +19,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
+	compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.66'
+	
+	
 }
 
 test {
