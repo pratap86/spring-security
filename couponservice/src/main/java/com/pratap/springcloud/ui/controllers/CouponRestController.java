@@ -36,7 +36,7 @@ public class CouponRestController {
 	 * @return CouponResponseModel as couponResponseModel
 	 */
 	@PostMapping("/coupons")
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus(value = HttpStatus.CREATED)
 	public CouponResponseModel createCoupon(@Valid @RequestBody CouponRequestModel requestModel) {
 		
 		modelMapper = new ModelMapper();
