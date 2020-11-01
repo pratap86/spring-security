@@ -20,6 +20,8 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+	
 	
 }
 
