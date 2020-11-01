@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pratap.springcloud.entity.CouponEntity;
+import com.pratap.springcloud.exceptions.CouponServiceException;
 import com.pratap.springcloud.repository.CouponRepository;
 import com.pratap.springcloud.service.CouponService;
 import com.pratap.springcloud.shared.dto.CouponDTO;
@@ -23,6 +24,10 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public CouponDTO create(CouponDTO couponDTO) {
 		
+		// check for valid couponDTO
+		//valid(couponDTO)
+		
+		
 		modelMapper = new ModelMapper();
 		CouponEntity couponEntity = modelMapper.map(couponDTO, CouponEntity.class);
 		CouponEntity savedCouponEntity = couponRepository.save(couponEntity);
@@ -35,14 +40,17 @@ public class CouponServiceImpl implements CouponService {
 	public CouponDTO getCoupon(String code) {
 
 		modelMapper = new ModelMapper();
-		CouponEntity couponResp = couponRepository.findByCode(code);
-		return modelMapper.map(couponResp, CouponDTO.class);
+		CouponEntity couponEntity = couponRepository.findByCode(code).orElseThrow(() -> new CouponServiceException("Coupon Not Found By Code : "+code));
+		return modelMapper.map(couponEntity, CouponDTO.class);
 	}
 
 	@Override
 	public List<CouponDTO> getCoupons() {
 
 		List<CouponEntity> couponEntities = couponRepository.findAll();
+		if(couponEntities.size() == 0) {
+			throw new CouponServiceException("No Coupon available.");
+		}
 		
 		modelMapper = new ModelMapper();
 		
