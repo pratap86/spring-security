@@ -12,6 +12,7 @@ import com.pratap.springcloud.exceptions.CouponServiceException;
 import com.pratap.springcloud.repository.CouponRepository;
 import com.pratap.springcloud.service.CouponService;
 import com.pratap.springcloud.shared.dto.CouponDTO;
+import com.pratap.springcloud.shared.dto.CouponUpdateDTO;
 
 @Service
 public class CouponServiceImpl implements CouponService {
@@ -55,6 +56,26 @@ public class CouponServiceImpl implements CouponService {
 		modelMapper = new ModelMapper();
 		
 		return couponEntities.stream().map(couponEntity -> modelMapper.map(couponEntity, CouponDTO.class)).collect(Collectors.toList());
+	}
+
+	@Override
+	public CouponDTO updateCoupon(String code, CouponUpdateDTO couponUpdateRequest) {
+		
+		CouponDTO couponResp = getCoupon(code);
+		
+		if(couponUpdateRequest.getDiscount() != null) {
+			couponResp.setDiscount(couponUpdateRequest.getDiscount());
+		}
+		if(couponUpdateRequest.getExpDate() != null) {
+			couponResp.setExpDate(couponUpdateRequest.getExpDate());
+		}
+		
+		modelMapper = new ModelMapper();
+		CouponEntity couponEntity = modelMapper.map(couponResp, CouponEntity.class);
+		
+		CouponEntity savedCoupon = couponRepository.updateCoupon(couponEntity.getDiscount(), couponEntity.getExpDate(), code);
+		
+		return modelMapper.map(savedCoupon, CouponDTO.class);
 	}
 
 }

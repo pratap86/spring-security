@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pratap.springcloud.service.CouponService;
 import com.pratap.springcloud.shared.dto.CouponDTO;
+import com.pratap.springcloud.shared.dto.CouponUpdateDTO;
 import com.pratap.springcloud.ui.model.request.CouponRequestModel;
+import com.pratap.springcloud.ui.model.request.CouponUpdateRequestModel;
 import com.pratap.springcloud.ui.model.response.CouponResponseModel;
 
 @RestController
@@ -60,6 +63,21 @@ public class CouponRestController {
 	public List<CouponResponseModel> getCoupons(){
 		List<CouponDTO> couponsdtos = couponService.getCoupons();
 		modelMapper = new ModelMapper();
-		return couponsdtos.stream().map(dto -> modelMapper.map(dto, CouponResponseModel.class)).collect(Collectors.toList()); 
+		return couponsdtos.stream().map(dto -> modelMapper.map(dto, CouponResponseModel.class)).collect(Collectors.toList());
 	}
+	
+	// 1. partial update - patch request
+	
+	@PatchMapping("/coupons/{code}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public CouponResponseModel updateCouponDetails(@PathVariable("code") String code, @RequestBody CouponUpdateRequestModel couponUpdateRequest) {
+		
+		modelMapper = new ModelMapper();
+		CouponUpdateDTO couponUpdateDTO = modelMapper.map(couponUpdateRequest, CouponUpdateDTO.class);
+		CouponDTO updatedCoupon = couponService.updateCoupon(code, couponUpdateDTO);
+		
+		return modelMapper.map(updatedCoupon, CouponResponseModel.class);
+	}
+	
+	// 2. delete a coupon
 }
