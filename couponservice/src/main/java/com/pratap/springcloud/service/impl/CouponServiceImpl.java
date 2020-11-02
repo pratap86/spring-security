@@ -7,9 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pratap.springcloud.entity.CouponEntity;
+import com.pratap.springcloud.entities.CouponEntity;
 import com.pratap.springcloud.exceptions.CouponServiceException;
-import com.pratap.springcloud.repository.CouponRepository;
+import com.pratap.springcloud.repositories.CouponRepository;
 import com.pratap.springcloud.service.CouponService;
 import com.pratap.springcloud.shared.dto.CouponDTO;
 

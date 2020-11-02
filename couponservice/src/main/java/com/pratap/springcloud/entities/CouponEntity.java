@@ -1,4 +1,4 @@
-package com.pratap.springcloud.entity;
+package com.pratap.springcloud.entities;
 
 import java.math.BigDecimal;
 
