@@ -1,4 +1,4 @@
-package com.pratap.springcloud.security.oath2.config;
+package com.pratap.springcloud.security.config;
 
 import java.security.KeyPair;
 
