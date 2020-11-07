@@ -1,17 +1,9 @@
-package com.pratap.springcloud.entity;
+package com.pratap.springcloud.ui.model.response;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class CouponResponseModel {
 
-@Entity(name = "coupon")
-public class CouponEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String code;
@@ -19,9 +11,13 @@ public class CouponEntity {
 	private BigDecimal discount;
 
 	private String expDate;
-	
-	public CouponEntity() {
-		// TODO Auto-generated constructor stub
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getCode() {
@@ -47,9 +43,5 @@ public class CouponEntity {
 	public void setExpDate(String expDate) {
 		this.expDate = expDate;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
+	
 }

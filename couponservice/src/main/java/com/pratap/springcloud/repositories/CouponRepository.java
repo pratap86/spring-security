@@ -1,10 +1,10 @@
-package com.pratap.springcloud.repository;
+package com.pratap.springcloud.repositories;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pratap.springcloud.entity.CouponEntity;
+import com.pratap.springcloud.entities.CouponEntity;
 
 public interface CouponRepository extends JpaRepository<CouponEntity, Long> {
 
