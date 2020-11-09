@@ -1,0 +1,5 @@
+keytool -genkeypair -alias jwtiscool -keyalg RSA -keypass jwtiscool -keystore jwtiscool.jks -storepass jwtiscool
+
+--generate public key & certificate from jwtiscool.jks
+
+keytool -list -rfc --keystore jwtiscool.jks | openssl x509 -inform pem -pubkey
