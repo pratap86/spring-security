@@ -14,6 +14,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private static final String RESOURCE_ID = "couponservice";
 	private static final String GET_PATTERNS = "/couponapi/coupons/{code:^[A-Z]*$}";
 	private static final String POST_PATTERNS = "/couponapi/coupons";
+	
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -27,5 +28,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.mvcMatchers(HttpMethod.POST, POST_PATTERNS).hasRole("ADMIN")
 		.anyRequest().denyAll().and().csrf().disable();
 	}
-	
 }
